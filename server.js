@@ -1,18 +1,38 @@
 const mysql = require("mysql2");
+const express = require("express");
 
-const connection = mysql.createConnection({
-  host: 'localhost', // host for connection
-  port: 3306, // default port for mysql is 3306
-  database: 'test', // database from which we want to connect out node application
-  user: 'root', // username of the mysql connection
-  password: 'B8ea6f88**' // password of the mysql connection
-  });
+const PORT = process.env.PORT || 3001; 
+const app = express();
 
-  connection.connect(function (err) {
-    if(err){
-        console.log("error occured while connecting");
-    }
-    else{
-        console.log("connection created with Mysql successfully");
-    }
- });
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    user: 'root',
+    password: 'B8ea6f88**',
+    database: 'election'
+  },
+  console.log('Connected to the election database.')
+);
+
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Hello There!'
+  })
+});
+
+db.query(`SELECT * FROM candidates`, (err, rows) => {
+  console.log(rows)
+});
+
+app.use((req, res) => {
+  res.status(404).end();
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
