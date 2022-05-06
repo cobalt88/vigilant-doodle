@@ -3,6 +3,8 @@ const router = express.Router();
 const db = require('../../db/connections');
 const inputCheck = require('../../utils/inputCheck');
 
+
+// delete route to delete a party by id
 router.delete('/party/:id', (req, res) => {
   const sql = `DELETE FROM parties WHERE id = ?`;
   const params = [req.params.id];
@@ -24,6 +26,8 @@ router.delete('/party/:id', (req, res) => {
   });
 });
 
+
+//get route to select all parties from the party table
 router.get('/parties', (req, res) => {
   const sql = `SELECT * FROM parties`;
   db.query(sql, (err, rows) => {
@@ -38,6 +42,7 @@ router.get('/parties', (req, res) => {
   });
 });
 
+// get route to select a specific party by id
 router.get('/party/:id', (req, res) => {
   const sql = `SELECT * FROM parties WHERE id = ?`;
   const params = [req.params.id];
@@ -52,6 +57,8 @@ router.get('/party/:id', (req, res) => {
     });
   });
 });
+
+//no routes for editing parties. This should be added in later
 
 module.exports = router;
 

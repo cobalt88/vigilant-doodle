@@ -33,5 +33,5 @@ CREATE TABLE votes (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT uc_voter UNIQUE (voter_id),
   CONSTRAINT fk_voter FOREIGN KEY (voter_id) REFERENCES voters(id) ON DELETE CASCADE,
-  CONSTRAINT fk_candidate FOREIGN KEY (candidate_id) REFERENCES candidates(id) ON DELETE CASCADE
+  CONSTRAINT fk_candidate FOREIGN KEY (candidate_id) REFERENCES candidates(id) ON DELETE CASCADE -- delete on cascade deletes the entire row not just one cell
 );

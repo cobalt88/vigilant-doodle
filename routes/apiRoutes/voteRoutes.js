@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../../db/connections');
 const inputCheck = require('../../utils/inputCheck');
 
+// tallies all the votes and returns the candidates in descending order
 router.get('/vote/total', (req, res) => {
   const sql = `
   SELECT candidates.*, parties.name AS party_name, COUNT(candidate_id) AS count
@@ -24,6 +25,8 @@ router.get('/vote/total', (req, res) => {
   });
 });
 
+
+// post route for casting votes, requires json input of voter and candidate id
 router.post('/vote', ({ body }, res) => {
   const errors = inputCheck(body, 'voter_id', 'candidate_id');
   if(errors) {

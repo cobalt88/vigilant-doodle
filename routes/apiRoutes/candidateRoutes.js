@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../../db/connections');
 const inputCheck = require('../../utils/inputCheck');
 
-
+//get route to select all candidates
 router.get('/candidates', (req, res) => {
   const sql = 
   `SELECT candidates.*, parties.name 
@@ -24,7 +24,7 @@ router.get('/candidates', (req, res) => {
   });
 });
 
-// Get a single candidate based on id#
+// Get route to get a single candidate based on id#
 router.get('/candidate/:id', (req, res) => {
   const sql =
   `SELECT candidates.*, parties.name 
@@ -47,7 +47,7 @@ router.get('/candidate/:id', (req, res) => {
   });
 });
 
-// Delete a candidate - Important note, ? = a placeholder value
+// Delete route to delete a candidate by id - Important note, ? = a placeholder value that will be updated based on user input in the db.query
 router.delete('/candidate/:id', (req, res) => {
   const sql = `DELETE FROM candidates WHERE id = ?`;
   const params = [req.params.id];
@@ -69,7 +69,7 @@ router.delete('/candidate/:id', (req, res) => {
   });
 });
 
-// Create a candidate
+// post route to create a new candidate
 router.post('/candidate', ({ body }, res) => {
   const errors = inputCheck(body, 'first_name', 'last_name', 'industry_connected');
   if (errors) {
@@ -91,7 +91,7 @@ router.post('/candidate', ({ body }, res) => {
   });
 });
 
-// Update a candidate's party
+// put route to update/change a candidate's party by id
 router.put('/candidate/:id', (req, res) => {
   const errors = inputCheck(req.body, 'party_id');
 

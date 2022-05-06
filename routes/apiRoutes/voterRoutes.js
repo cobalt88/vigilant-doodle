@@ -3,6 +3,8 @@ const router = express.Router();
 const db = require('../../db/connections');
 const inputCheck = require('../../utils/inputCheck');
 
+
+// get request to select all voters and return their data ad a json object
 router.get('/voters', (req, res) => {
   const sql = `SELECT * FROM voters`;
 
@@ -18,6 +20,8 @@ router.get('/voters', (req, res) => {
   });
 });
 
+
+//get route to select a specific voter by id
 router.get('/voter/:id', (req, res) => {
   const sql = `SELECT * FROM voters WHERE id = ?`;
   const params = [req.params.id];
@@ -34,6 +38,8 @@ router.get('/voter/:id', (req, res) => {
   });
 });
 
+
+//post route to add another voter to the voter table
 router.post('/voter', ({ body }, res) => {
   const sql = `INSERT INTO voters (first_name, last_name, email) VALUES (?,?,?)`;
   const params = [body.first_name, body.last_name, body.email];
@@ -50,6 +56,8 @@ router.post('/voter', ({ body }, res) => {
   });
 });
 
+
+//put (edit) route to update voter by id and insert an email address
 router.put('/voter/:id', (req, res) => {
   const errors = inputCheck(req.body, 'email');
   if (errors) {
@@ -77,6 +85,8 @@ router.put('/voter/:id', (req, res) => {
   });
 });
 
+
+// delete route to delete a voter by id
 router.delete('/voter/:id', (req, res) => {
   const sql = `DELETE FROM voters WHERE id = ?`;
 
