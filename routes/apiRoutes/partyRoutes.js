@@ -53,3 +53,5 @@ router.get('/party/:id', (req, res) => {
   });
 });
 
+module.exports = router;
+
