@@ -24,17 +24,6 @@ router.get('/vote/total', (req, res) => {
   });
 });
 
-// db.query(sql, (err, rows) => {
-//   if(err) {
-//     res.status(500).json({ error: err.message });
-//     return;
-//   }
-//   res.json({
-//     message: 'success',
-//     data: rows,
-//   });
-// });
-
 router.post('/vote', ({ body }, res) => {
   const errors = inputCheck(body, 'voter_id', 'candidate_id');
   if(errors) {
