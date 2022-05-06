@@ -1,11 +1,11 @@
 const mysql = require("mysql2");
 
-
+//configure your own server connection here
 const db = mysql.createConnection(
   {
-    host: 'localhost',
-    user: 'root',
-    password: 'B8ea6f88**',
+    host: '',
+    user: '',
+    password: '',
     database: 'election'
   },
   console.log('Connected to the election database.')
